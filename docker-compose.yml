@@ -1,0 +1,18 @@
+services:
+  bot:
+    container_name: kaggle_discord_bot
+    build: .
+    environment:
+      UV_PROJECT_ENVIRONMENT: /venv # create virtual environment in /venv inside the container
+    volumes:
+      - type: bind
+        source: kaggle-discord-bot
+        target: /app_root
+    working_dir: /app_root
+    env_file:
+      - .env
+    tty: true
+    stdin_open: true
+    command: uv run app.py
+    restart: always
+
